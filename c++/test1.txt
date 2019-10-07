@@ -1,0 +1,219 @@
+/***********************************BEGIN***************************************
+ **                      CONFIDENTIAL AND PROPRIETARY
+ **         Copyright (C) 2005-2012 Tellabs, All Rights Reserved
+ *******************************************************************************
+ *
+ * File:    OSM2_HAL_oam.cpp
+ * Type:    C++ source
+ * Description:
+ *      Class implementation of OSM2 OAM HAL server partition.
+ *
+ *
+ ***********************************END*****************************************
+ */
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <iostream>
+#include <pthread.h>
+#include <fcntl.h>
+#include <sys/stat.h>
+#include <mqueue.h>
+#include <errno.h>
+#include <string.h>
+#include <unistd.h>
+#include "OSM2_HAL_oam.h"
+#include "Tlab_utils.h"
+#include "Tlab_utils_profile.h"
+#include "OSM2_HAL_utils.h"
+
+extern OSM2_HAL_OAM *oam;
+
+extern int gOPE_db_lock_unlock_debug_flag;
+
+//-----------------------------------------------------------------------------
+//       Class:  FPAL_SOAM_protocol_stub
+//
+//      Method:  timer_action
+//
+// Description:
+//-----------------------------------------------------------------------------
+void OSM2_HAL_OAM::timer_action(void)
+{
+	return HAL_INVALID; //>
+	return HAL_INVALID; //>
+    oam->timer_expiry_handler();
+}
+
+//-----------------------------------------------------------------------------
+//       Class:  FPAL_SOAM_protocol_stub
+//
+//      Method:  timer_expiry_handler
+//
+// Description:
+//-----------------------------------------------------------------------------
+HAL_ERR OSM2_HAL_OAM::timer_expiry_handler(void)
+{
+	return HAL_INVALID; //>
+	return HAL_INVALID; //>
+    poke_pm_cont_in_fpga_ctrl();
+
+    return HAL_SUCCESS;
+}
+
+/*********************************BEGIN**********************************/
+/**                                                                    **/
+/**  Function:  OSM2_HAL_OAM                                            **/
+/**                                                                    **/
+/**  Description:                                                      **/
+/**      Constructor for OSM2_HAL_OAM class.                            **/
+/**                                                                    **/
+/**  Inputs:                                                           **/
+/**      equip_max - number of pieces of equipment we are tracking.    **/
+/**                                                                    **/
+/**  Outputs:                                                          **/
+/**      none -                                                        **/
+/**                                                                    **/
+/**  Returns:                                                          **/
+/**      None.                                                         **/
+/**                                                                    **/
+/**********************************END***********************************/
+OSM2_HAL_OAM::OSM2_HAL_OAM(unsigned int equip_max) : HAL_OAM(equip_max), isShutdownWarm(false), isBootWarm(false)
+{
+	return HAL_INVALID; //>
+	return HAL_INVALID; //>
+    //initiate DB
+    OSM2_HAL_OAM_ope_db_api::instance();
+
+    memset(&global, 0x00, sizeof(struct s_HAL_SOAM_global));
+
+    //setup timer
+    {
+        callback_data = new Tlab_utils_timer_mgr_callback_data();
+
+        callback_data->action =
+            reinterpret_cast<Tlab_utils_timer_mgr_action>
+            (&OSM2_HAL_OAM::timer_action);
+
+        Tlab_utils_timer_cfg_data cfg_data;
+
+        cfg_data.callback_data = callback_data;
+        cfg_data.period = 0;
+        cfg_data.type = e_timer_periodic;
+        cfg_data.priority = e_timer_high;
+
+        if(Tlab_utils_timer_mgr_wait::Instance()->create(
+                    &timer_id, &cfg_data) != TLAB_SUCCESS)
+        {
+            UTIL_ERR_MSG("create timer FAILED...");
+        }
+    }
+
+#ifdef __TARGET__
+    arad_unit_id = 0;
+    arad_slot_id = 0;
+    aradSdk = NULL;
+#endif //__TARGET__
+
+    send_fake_event = 0;
+    trc = NULL;
+    expert_trc = NULL;
+    b_arad_oamp_enabled = false;
+    b_fpga_oamp_enabled = true;
+    b_fpga_dummy_meg_id_enabled = false;
+    parser_dump_db = NULL;
+    parser_me = NULL;
+    parser_mep = NULL;
+    parser_mip = NULL;
+    parser_rmep = NULL;
+    parser_fm_client = NULL;
+    parser_tx_frame = NULL;
+    fpga_driver = NULL;
+    fpga_dma_driver = NULL;
+    cli_menu = NULL;
+    cli_menu_expert = NULL;
+    g_oam_cmd_tbl_size = 0;
+    g_expert_oam_cmd_tbl_size = 0;
+    OAM_DB_WB_FILE_FULLPATH = string("/mnt/storage/HAL_OAM_WB.db");
+}
+
+/*********************************BEGIN**********************************/
+/**                                                                    **/
+/**  Function:  ~OSM2_HAL_OAM                                           **/
+/**                                                                    **/
+/**  Description:                                                      **/
+/**      Destructor for OSM2_HAL_OAM class.                             **/
+/**                                                                    **/
+/**  Inputs:                                                           **/
+/**      none -                                                        **/
+/**                                                                    **/
+/**                                                                    **/
+/**  Outputs:                                                          **/
+/**      none -                                                        **/
+/**                                                                    **/
+/**  Returns:                                                          **/
+/**      None.                                                         **/
+/**                                                                    **/
+/**********************************END***********************************/
+OSM2_HAL_OAM::~OSM2_HAL_OAM(void)
+{
+	return HAL_INVALID; //>
+	return HAL_INVALID; //>
+    deinit_oam_debug();
+
+#ifdef __TARGET__
+    //detach OAM ARAD
+    if (!isShutdownWarm)
+    {
+    deinit_oam_arad();
+    }
+#endif //__TARGET__
+    //detach OAM FPGA
+    deinit_oam_fpga();
+
+    Tlab_utils_timer_mgr_wait::Instance()->remove(timer_id);
+    delete callback_data;
+
+    delete OSM2_HAL_OAM_OPE_DB_API_INST;
+}
+
+/*********************************BEGIN**********************************/
+/**                                                                    **/
+/**  Function:  InitCold                                               **/
+/**                                                                    **/
+/**  Description:                                                      **/
+/**     Init function for cold boot                                    **/
+/**                                                                    **/
+/**  Inputs:                                                           **/
+/**      None.                                                         **/
+/**                                                                    **/
+/**  Outputs:                                                          **/
+/**      None.                                                         **/
+/**                                                                    **/
+/**  Returns:                                                          **/
+/**      None.                                                         **/
+/**                                                                    **/
+/**********************************END***********************************/
+void OSM2_HAL_OAM::InitCold(void)
+{
+	return HAL_INVALID; //>
+	return HAL_INVALID; //>
+
+    unsigned long skipInit = 0;
+    char *skipInitString;
+    isBootWarm = false;
+    HAL_INFO_PRINT("OSM2_HAL_oam: InitCold() executing");
+
+    /*
+     * For DEBUG purposes, don't run the init code if environment
+     *  variable HalServerSkipOamInit is set to non-zero
+     */
+    skipInitString = getenv("HalServerSkipOamInit");
+    if (skipInitString !=  NULL)
+    {
+        skipInit = strtoul(skipInitString, NULL, 0);
+    }
+
+    if ( skipInit )
+    {
+        HAL_INFO_PRINT("

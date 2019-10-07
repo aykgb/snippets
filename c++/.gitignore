@@ -1,0 +1,9 @@
+*.out
+*.out.dSYM/
+*.lock
+*.meta
+*.bk
+.xmake
+build
+db
+

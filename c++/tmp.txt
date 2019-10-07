@@ -1,0 +1,49 @@
+c t
+int gi 2/10
+switchport ingress-filter
+no shutdown
+end
+ 
+ 
+c t
+int gi 3/10
+switchport ingress-filter
+no shutdown
+end
+ 
+ 
+ 
+ 
+c t
+sw
+vlan 1000
+port add gi 2/10
+port add gi 3/10
+end
+ 
+ 
+c t
+class-map class-map-xg0
+permit
+end
+ 
+c t
+meter-profile meter-profile-name bwp-xp0 slot 0
+end
+ 
+c t
+policer policer-xg0
+set-meter meter-profile-name bwp-xp0
+end
+ 
+c t
+policy-map policy-map-xg0
+class class-map-xg0 priority 1
+police policer-xg0
+end
+
+c t 
+service-policy policy-map-xg0
+end
+
+

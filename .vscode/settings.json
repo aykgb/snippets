@@ -1,0 +1,52 @@
+{
+    "python.linting.pylintEnabled": false,
+    "python.linting.flake8Enabled": true,
+    "python.linting.enabled": true,
+    "gotoSymbolStack.currentStackPosition": 5,
+    "gotoSymbolStack.maxStackPosition": 1000,
+    "gotoSymbolStack.filePositionInfo": [
+        {
+            "textFile": "/Users/didi/code/github/aykgb/snippets/cppsnippets/tst-boost_remove_all.cc",
+            "viewColumn": 1,
+            "textPosition": {
+                "line": 7,
+                "character": 27
+            }
+        },
+        {
+            "textFile": "/Users/didi/code/github/aykgb/snippets/cppsnippets/tst-boost_remove_all.cc",
+            "viewColumn": 1,
+            "textPosition": {
+                "line": 7,
+                "character": 28
+            }
+        },
+        {
+            "textFile": "/Users/didi/code/github/aykgb/snippets/cppsnippets/tst-bits.cc",
+            "viewColumn": 1,
+            "textPosition": {
+                "line": 17,
+                "character": 11
+            }
+        },
+        {
+            "textFile": "/Users/didi/code/github/aykgb/snippets/cppsnippets/tst-boost_remove_all.cc",
+            "viewColumn": 1,
+            "textPosition": {
+                "line": 15,
+                "character": 36
+            }
+        },
+        {
+            "textFile": "/Users/didi/code/github/aykgb/snippets/cppsnippets/tst-boost_remove_all.cc",
+            "viewColumn": 1,
+            "textPosition": {
+                "line": 0,
+                "character": 13
+            }
+        }
+    ],
+    "files.associations": {
+        "iostream": "cpp"
+    }
+}

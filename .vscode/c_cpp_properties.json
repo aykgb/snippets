@@ -1,0 +1,17 @@
+{
+    "configurations": [
+        {
+            "name": "Mac",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "/usr/local/Cellar/gcc/7.3.0/include/c++/7.3.0",
+                "/usr/local/Cellar/gcc/7.3.0/include/c++/7.3.0/x86_64-apple-darwin16.7.0",
+                "/usr/local/Cellar/boost/1.68.0_1/include"
+            ],
+            "defines": [],
+            "macFrameworkPath": [],
+            "compilerPath": "/usr/local/bin/gcc-7"
+        }
+    ],
+    "version": 4
+}

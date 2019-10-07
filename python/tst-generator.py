@@ -1,0 +1,1 @@
+#!/usr/local/bin/python3import osdef triangles():    a, b = list(), [1]    while True:        yield b        a = b.copy()   # copy ,but =        i = 1        while i < len(a):            b[i] = a[i] + a[i - 1]            i += 1        b.append(1)    return 'done't = triangles()next(t)next(t)next(t)next(t)next(t)print('hello, world!\n')

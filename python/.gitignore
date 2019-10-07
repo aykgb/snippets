@@ -1,0 +1,9 @@
+*.png
+__pycache__
+backup
+.ipynb_checkpoints
+nohup.out
+.ipynb_checkpoints/stock_latest_5days_analysis-Copy1-checkpoint.ipynb
+res
+*.txt
+.vscode
