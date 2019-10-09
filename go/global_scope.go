@@ -2,7 +2,7 @@ package main
 
 var a = "G"
 
-func main() {
+func testGlobalScope() {
 	n()
 	m()
 	n()

@@ -5,7 +5,7 @@ import (
 	"strconv"
 )
 
-func main() {
+func testStringConversion2() {
 	var orig string = "ABC"
 	var newS string
 

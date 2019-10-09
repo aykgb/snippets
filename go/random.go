@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-func main() {
+func testRandom() {
 	for i := 0; i < 10; i++ {
 		a := rand.Int()
 		fmt.Printf("%d / ", a)

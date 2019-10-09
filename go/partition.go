@@ -72,7 +72,7 @@ func printArr(arr []int) {
 	fmt.Printf("\n")
 }
 
-func main() {
+func testPartition() {
 	arr := []int{21, 40, 16, 32, 9, 51, 10, 34}
 	pos := partition(arr, 0, len(arr))
 	fmt.Printf("pos: %d\n", pos)

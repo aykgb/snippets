@@ -2,12 +2,8 @@ package main
 
 import "fmt"
 
-func main() {
-	fibonacci(10)
-}
-
-func fibonacci(n int) (res int) {
-	intra_func := func() func() int {
+func fibonacciClosure(n int) (res int) {
+	intraFunc := func() func() int {
 		a, b := -1, 1
 		return func() int {
 			a, b = b, a+b
@@ -16,7 +12,7 @@ func fibonacci(n int) (res int) {
 	}()
 
 	for i := 0; i <= n; i++ {
-		fmt.Printf("%d ", intra_func())
+		fmt.Printf("%d ", intraFunc())
 	}
 
 	return

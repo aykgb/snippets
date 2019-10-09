@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-func main() {
+func testFunctionReturn() {
 	p2 := Add2()
 	fmt.Printf("Call Add2 for 3 gives: %v\n", p2(3))
 

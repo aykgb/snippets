@@ -2,7 +2,7 @@
     "python.linting.pylintEnabled": false,
     "python.linting.flake8Enabled": true,
     "python.linting.enabled": true,
-    "gotoSymbolStack.currentStackPosition": 5,
+    "gotoSymbolStack.currentStackPosition": 13,
     "gotoSymbolStack.maxStackPosition": 1000,
     "gotoSymbolStack.filePositionInfo": [
         {
@@ -43,6 +43,70 @@
             "textPosition": {
                 "line": 0,
                 "character": 13
+            }
+        },
+        {
+            "textFile": "/Users/didi/code/github/aykgb/snippets/go/busycpu.go",
+            "viewColumn": 1,
+            "textPosition": {
+                "line": 7,
+                "character": 24
+            }
+        },
+        {
+            "textFile": "/Users/didi/code/github/aykgb/snippets/go/request_limit_test.go",
+            "viewColumn": 1,
+            "textPosition": {
+                "line": 22,
+                "character": 12
+            }
+        },
+        {
+            "textFile": "/Users/didi/code/github/aykgb/snippets/go/filescaner.go",
+            "viewColumn": 1,
+            "textPosition": {
+                "line": 32,
+                "character": 7
+            }
+        },
+        {
+            "textFile": "/Users/didi/code/github/aykgb/snippets/go/main.go",
+            "viewColumn": 1,
+            "textPosition": {
+                "line": 3,
+                "character": 7
+            }
+        },
+        {
+            "textFile": "/Users/didi/code/github/aykgb/snippets/go/readlines.go",
+            "viewColumn": 1,
+            "textPosition": {
+                "line": 35,
+                "character": 15
+            }
+        },
+        {
+            "textFile": "/Users/didi/code/github/aykgb/snippets/go/main.go",
+            "viewColumn": 1,
+            "textPosition": {
+                "line": 4,
+                "character": 4
+            }
+        },
+        {
+            "textFile": "/Users/didi/code/github/aykgb/snippets/go/main.go",
+            "viewColumn": 1,
+            "textPosition": {
+                "line": 4,
+                "character": 7
+            }
+        },
+        {
+            "textFile": "/Users/didi/code/github/aykgb/snippets/go/main.go",
+            "viewColumn": 1,
+            "textPosition": {
+                "line": 7,
+                "character": 3
             }
         }
     ],

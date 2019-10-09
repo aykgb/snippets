@@ -5,7 +5,7 @@ import (
 	"os"
 )
 
-func main() {
+func testGoos() {
 	var goos string = os.Getenv("GOOS")
 	fmt.Printf("Ther operating system is: %s\n", goos)
 	path := os.Getenv("PATH")

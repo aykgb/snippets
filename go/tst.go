@@ -66,7 +66,7 @@ func readRowKeysFromFile(filename string) (err error) {
 	return
 }
 
-func main() {
+func testTst() {
 	sigs := make(chan os.Signal, 1)
 	done := make(chan bool, 1)
 	exit := false

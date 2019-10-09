@@ -2,11 +2,11 @@ package main
 
 import "fmt"
 
-func main() {
+func testDefer() {
 	function1()
 
-	a()
-	f()
+	aa()
+	bb()
 }
 
 func function1() {
@@ -19,14 +19,14 @@ func function2() {
 	fmt.Printf("function2: deferred until the end of the calling function!")
 }
 
-func a() {
+func aa() {
 	i := 0
 	defer fmt.Printf("\n%d\n", i)
 	i++
 	return
 }
 
-func f() {
+func bb() {
 	for i := 0; i < 5; i++ {
 		defer fmt.Printf("%d ", i)
 	}

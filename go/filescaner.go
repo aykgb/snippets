@@ -4,11 +4,10 @@ import (
 	"bufio"
 	"flag"
 	"fmt"
-	"log"
 	"os"
 )
 
-func main() {
+func testFileScanner() {
 	filename := flag.String("file", "input.txt", "name of input file")
 	flag.Parse()
 
@@ -30,6 +29,6 @@ func main() {
 	fmt.Println(scanner.Text())
 
 	if err := scanner.Err(); err != nil {
-		log.Fatal(err)
+		fmt.Printf("error %+v", err)
 	}
 }

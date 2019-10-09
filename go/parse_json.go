@@ -1,14 +1,16 @@
 package main
 
-import "io"
-import "os"
-import "fmt"
-import "encoding/json"
-import "bufio"
+import (
+	"bufio"
+	"encoding/json"
+	"fmt"
+	"io"
+	"os"
+)
 
-var rowKeys []string
+var rowKeys2 []string
 
-func main() {
+func testParseJson() {
 	inputFile, inputError := os.Open("./dict.json")
 	if inputError != nil {
 		fmt.Printf("open file error.")
@@ -37,14 +39,14 @@ func main() {
 			if k == "key" {
 				vv := v.(string)
 				fmt.Println(vv)
-				rowKeys = append(rowKeys, vv)
+				rowKeys2 = append(rowKeys2, vv)
 			}
 		}
 	}
 
-	fmt.Printf("slice len(rowKeys) %d\n", len(rowKeys))
-	for index := range rowKeys {
-		fmt.Printf("%s ", rowKeys[index])
+	fmt.Printf("slice len(rowKeys2) %d\n", len(rowKeys2))
+	for index := range rowKeys2 {
+		fmt.Printf("%s ", rowKeys2[index])
 	}
 
 }

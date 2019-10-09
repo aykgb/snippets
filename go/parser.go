@@ -361,7 +361,7 @@ func testTableRowParse() {
 	file.Close()
 }
 
-func main() {
+func testParser() {
 	// fn := flag.String("file", "", "name of gzip file.")
 	// flag.Parse()
 	fn := "taxi_service_score_dict_taxi_service_score.gz"

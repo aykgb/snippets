@@ -17,6 +17,7 @@ tst_time_parse
 tst_trim_left
 tst_wg
 input.gz
+input
 fan-in_out
 future
 generator

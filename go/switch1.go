@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-func main() {
+func testSwitch1() {
 	var num1 int = 98
 
 	switch num1 {

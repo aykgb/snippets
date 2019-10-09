@@ -2,17 +2,17 @@ package main
 
 import "fmt"
 
-var a = "G"
+var aaa = "G"
 
-func main() {
-	n()
-	m()
-	n()
+func testLocalScope() {
+	n1()
+	m1()
+	n1()
 }
 
-func n() { print(a) }
-func m() {
-	a := "O"
-	print(a)
-	fmt.Printf(a)
+func n1() { print(aaa) }
+func m1() {
+	aaa := "O"
+	print(aaa)
+	fmt.Printf(aaa)
 }
