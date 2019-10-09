@@ -2,7 +2,7 @@
 fname=$1
 target_host=$2
 
-function usage() {
+usage() {
     echo Usage: rebalance.sh {fname} {target_host}
 }
 
@@ -22,19 +22,6 @@ ofname=$fname.json
 rm -f $ofname
 touch $ofname
 echo "[" >>$ofname
-
-# content=`cat $fname`
-# for((i=0;i<$count;i++)); do
-#     fragment=`echo $content | jq ".[$count]"`
-#     dstchunk=`echo $fragment| jq ".DstTrp.ChunkAddr"`
-#     if [ "$dstchunk" = "\"$target\"" ]; then
-#         if (( $i == $count-1 )); then
-#             echo $fragment >> $ofname
-#         else
-#             echo $fragment, >> $ofname
-#         fi
-#     fi
-# done
 
 flag=0
 count=0

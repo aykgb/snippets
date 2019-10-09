@@ -14,7 +14,6 @@ func loop(id int, wg *sync.WaitGroup) {
 	for {
 		counter++
 	}
-	wg.Done()
 }
 
 func testCPUBusy() {

@@ -7,9 +7,9 @@ import (
 )
 
 type RequestLimiter struct {
-	QPS             int64      `json:"qps"`
-	AllowedRequests int64      `json:"allowed_requests"`
-	LastUpdatedTime time.Time  `json:"last_updated_time"`
+	QPS             int64      `json:"qps"`               // 设置限流的qps
+	AllowedRequests int64      `json:"allowed_requests"`  // 漏桶允许的请求数，最大不超过qps
+	LastUpdatedTime time.Time  `json:"last_updated_time"` // 用于计算漏桶中可以添加的水量
 	mtx             sync.Mutex //! 多协程访问
 }
 
@@ -50,14 +50,14 @@ func RequestLimiterTest(limitQPS, reqQPS, sec int64) (counter int64) {
 	fmt.Printf("limit qps %d, request qps %d\n", limitQPS, reqQPS)
 	beg := time.Now()
 	limiter := NewRequestLimiter(limitQPS)
-	counter = 1
+	counter = 0
 	for {
 		if limiter.Allowed() {
-			fmt.Printf("==> qps %d duration:%3.3f seconds %dst request allowed. \n",
+			counter++
+			fmt.Printf("==> qps:%d duration:%3.3f seconds total %d requests allowed. \n",
 				limiter.QPS,
 				time.Now().Sub(beg).Seconds(),
 				counter)
-			counter++
 		}
 		time.Sleep(time.Second / time.Duration(reqQPS+1))
 		if time.Now().Sub(beg) > time.Duration(int64(time.Second)*sec) {

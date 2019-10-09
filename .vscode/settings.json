@@ -2,7 +2,7 @@
     "python.linting.pylintEnabled": false,
     "python.linting.flake8Enabled": true,
     "python.linting.enabled": true,
-    "gotoSymbolStack.currentStackPosition": 13,
+    "gotoSymbolStack.currentStackPosition": 16,
     "gotoSymbolStack.maxStackPosition": 1000,
     "gotoSymbolStack.filePositionInfo": [
         {
@@ -73,7 +73,7 @@
             "textFile": "/Users/didi/code/github/aykgb/snippets/go/main.go",
             "viewColumn": 1,
             "textPosition": {
-                "line": 3,
+                "line": 8,
                 "character": 7
             }
         },
@@ -89,7 +89,7 @@
             "textFile": "/Users/didi/code/github/aykgb/snippets/go/main.go",
             "viewColumn": 1,
             "textPosition": {
-                "line": 4,
+                "line": 8,
                 "character": 4
             }
         },
@@ -97,7 +97,7 @@
             "textFile": "/Users/didi/code/github/aykgb/snippets/go/main.go",
             "viewColumn": 1,
             "textPosition": {
-                "line": 4,
+                "line": 8,
                 "character": 7
             }
         },
@@ -105,8 +105,32 @@
             "textFile": "/Users/didi/code/github/aykgb/snippets/go/main.go",
             "viewColumn": 1,
             "textPosition": {
-                "line": 7,
+                "line": 10,
                 "character": 3
+            }
+        },
+        {
+            "textFile": "/Users/didi/code/github/aykgb/snippets/go/main.go",
+            "viewColumn": 1,
+            "textPosition": {
+                "line": 9,
+                "character": 8
+            }
+        },
+        {
+            "textFile": "/Users/didi/code/github/aykgb/snippets/go/request_limiter_test.go",
+            "viewColumn": 1,
+            "textPosition": {
+                "line": 29,
+                "character": 28
+            }
+        },
+        {
+            "textFile": "/Users/didi/code/github/aykgb/snippets/go/request_limiter_test.go",
+            "viewColumn": 1,
+            "textPosition": {
+                "line": 29,
+                "character": 29
             }
         }
     ],

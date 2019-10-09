@@ -7,6 +7,5 @@ func init() {
 }
 
 func main() {
-	//testCPUBusy()
-	GenTestData(1000000)
+	testCPUBusy()
 }
