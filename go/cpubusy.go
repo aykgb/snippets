@@ -6,7 +6,7 @@ import (
 )
 
 const (
-	maxUsedCPUCores = 24
+	maxUsedCPUCores = 48
 )
 
 func loop(id int, wg *sync.WaitGroup) {

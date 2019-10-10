@@ -27,7 +27,7 @@ func testNil() {
 
 	err := Test()
 	if err != nil {
-		fmt.Println("Hello, Mr. Pike!")
+		fmt.Println("Hello, Mr. Pike!!")
 	}
 
 	var tableName []string
