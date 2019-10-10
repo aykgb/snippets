@@ -2,7 +2,11 @@
     "python.linting.pylintEnabled": false,
     "python.linting.flake8Enabled": true,
     "python.linting.enabled": true,
-    "gotoSymbolStack.currentStackPosition": 16,
+    "C_Cpp.default.browse.limitSymbolsToIncludedHeaders": true,
+    "files.associations": {
+        "iostream": "cpp"
+    },
+    "gotoSymbolStack.currentStackPosition": 18,
     "gotoSymbolStack.maxStackPosition": 1000,
     "gotoSymbolStack.filePositionInfo": [
         {
@@ -132,9 +136,22 @@
                 "line": 29,
                 "character": 29
             }
+        },
+        {
+            "textFile": "/Users/didi/code/github/aykgb/snippets/go/parser.go",
+            "viewColumn": 1,
+            "textPosition": {
+                "line": 76,
+                "character": 18
+            }
+        },
+        {
+            "textFile": "/Users/didi/code/github/aykgb/snippets/c++/cstyle_string_array.cpp",
+            "viewColumn": 1,
+            "textPosition": {
+                "line": 25,
+                "character": 12
+            }
         }
     ],
-    "files.associations": {
-        "iostream": "cpp"
-    }
 }
