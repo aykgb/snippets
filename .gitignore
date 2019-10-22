@@ -7,3 +7,6 @@
 *.obj
 *.class
 .vscode
+*.dSYM
+CMakeFiles/
+CMakeCache.txt
