@@ -739,13 +739,13 @@ func (s *SqlBuilder) AddOrderBy(sorts map[string]bool) *SqlBuilder {
 			if desc {
 				s.sqlRaw += sortField + " DESC, "
 			} else {
-				s.sqlRaw += ", "
+				s.sqlRaw += sortField + ", "
 			}
 		} else {
 			if desc {
 				s.sqlRaw += sortField + " DESC "
 			} else {
-				s.sqlRaw += " "
+				s.sqlRaw += sortField + " "
 			}
 		}
 	}
