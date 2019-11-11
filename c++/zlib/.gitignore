@@ -1,0 +1,13 @@
+main
+.vscode
+gizzle_queue*
+*.o
+*.a
+main.dSYM
+*.diff
+exp_zlib
+exp_zlib.dSYM/Contents/Resources/DWARF/exp_zlib
+*.gz
+res
+table_gizzle_drunken_model_dict_gizzle_drunken_model
+exp_zlib.dSYM
