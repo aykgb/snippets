@@ -748,6 +748,7 @@ func (s *SqlBuilder) AddOrderBy(sorts map[string]bool) *SqlBuilder {
 				s.sqlRaw += sortField + " "
 			}
 		}
+		count++
 	}
 	return s
 }
