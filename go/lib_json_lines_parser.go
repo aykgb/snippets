@@ -250,54 +250,6 @@ func (flr *FileLineReader) ParseLinesFromBytes(data []byte) error {
 	return nil
 }
 
-type GizzleFormatObject struct {
-	RowKey      string   `json:"key"`
-	FieldValues []string `json:"fieldvalues"`
-	TableName   string   `json:"tablename"`
-	TTL         string   `json:"ttl"`
-}
-
-type TableRow struct {
-	gfo         *GizzleFormatObject // gizzle format object
-	FieldKeys   []string
-	FieldValues []string
-}
-
-func (tr *TableRow) Parse(jsonLine string) error {
-	tr.gfo = &GizzleFormatObject{}
-	err := json.Unmarshal([]byte(jsonLine), tr.gfo)
-	if err != nil {
-		fmt.Printf("Parse Json failed. line:%s error:%v\n", jsonLine, err)
-		return err
-	}
-	for _, fv := range tr.gfo.FieldValues {
-		pair := strings.Split(fv, "\t")
-		if len(pair) < 2 {
-			return errors.New("Invalid fieldvalues format")
-		}
-		tr.FieldKeys = append(tr.FieldKeys, pair[0])
-		tr.FieldValues = append(tr.FieldValues, pair[1])
-	}
-
-	return nil
-}
-
-func ParseJsonLines(jsonLines []string) (rows []*TableRow, err error) {
-	rows = make([]*TableRow, len(jsonLines))
-	for idx, jsonLine := range jsonLines {
-		if jsonLine == "" {
-			continue
-		}
-		rows[idx] = &TableRow{}
-		rows[idx].gfo = &GizzleFormatObject{}
-		err = rows[idx].Parse(jsonLine)
-		if err != nil {
-			return
-		}
-	}
-	return
-}
-
 func testChanStringArr() {
 	source := make(chan []string, 1024)
 
@@ -337,6 +289,79 @@ func testGzipfileReader(fn string) {
 	}
 }
 
+type GizzleFormatObject struct {
+	RowKey      string   `json:"key"`
+	FieldValues []string `json:"fieldvalues"`
+	TableName   string   `json:"tablename"`
+	TTL         string   `json:"ttl"`
+}
+
+type TableRow struct {
+	gfo         *GizzleFormatObject // gizzle format object
+	FieldKeys   []string
+	FieldValues []string
+}
+
+func (tr *TableRow) Parse(jsonLine string) error {
+	tr.gfo = &GizzleFormatObject{}
+	err := json.Unmarshal([]byte(jsonLine), tr.gfo)
+	if err != nil {
+		fmt.Printf("Parse Json failed. line:%s error:%v\n", jsonLine, err)
+		return err
+	}
+	for _, fv := range tr.gfo.FieldValues {
+		pair := strings.Split(fv, "\t")
+		if len(pair) < 2 {
+			return errors.New("Invalid fieldvalues format")
+		}
+		tr.FieldKeys = append(tr.FieldKeys, pair[0])
+		tr.FieldValues = append(tr.FieldValues, pair[1])
+	}
+
+	return nil
+}
+
+func ParseJsonLines(jsonLines []string, fidKeyCnt *int64) (rows []*TableRow, err error) {
+	rows = make([]*TableRow, len(jsonLines))
+	for idx, jsonLine := range jsonLines {
+		if jsonLine == "" {
+			continue
+		}
+		rows[idx] = &TableRow{}
+		rows[idx].gfo = &GizzleFormatObject{}
+		err = rows[idx].Parse(jsonLine)
+		if err != nil {
+			return
+		}
+		*fidKeyCnt += int64(len(rows[idx].FieldKeys))
+	}
+	return
+}
+
+func testParseJsonLines(fn string) {
+	gZFileReader := NewGZFileReader(fn)
+	fileLineReader := NewFileLineReader(gZFileReader)
+	for {
+		lines, err := fileLineReader.ReadLines(1000)
+		if err != nil {
+			fmt.Printf("read line from gzip file error %v\n", err)
+			return
+		}
+		if len(lines) == 0 {
+			return
+		}
+		var fidKeyCnt int64
+		rows, err := ParseJsonLines(lines, &fidKeyCnt)
+		if err != nil {
+			fmt.Printf("parse json lines error %v\n", err)
+			return
+		}
+		for _, row := range rows {
+			fmt.Printf("row_key:%s row:%+v\n", row.gfo.RowKey, row)
+		}
+	}
+}
+
 func testTableRowParse() {
 	file, err := os.Open("json.txt")
 	if err != nil {
@@ -359,13 +384,4 @@ func testTableRowParse() {
 	fmt.Printf("%+v", row.gfo)
 
 	file.Close()
-}
-
-func testParser() {
-	// fn := flag.String("file", "", "name of gzip file.")
-	// flag.Parse()
-	fn := "taxi_service_score_dict_taxi_service_score.gz"
-	testGzipfileReader(fn)
-
-	return
 }
