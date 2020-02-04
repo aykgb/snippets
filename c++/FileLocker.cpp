@@ -4,9 +4,9 @@
 
 #include <string.h>
 #include <string>
+#include <glog/logging.h>
 
 #include "FileLocker.h"
-// #include "Log.h"
 
 using namespace std;
 
