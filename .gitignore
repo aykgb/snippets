@@ -10,3 +10,4 @@
 *.dSYM
 CMakeFiles/
 CMakeCache.txt
+.metals/
