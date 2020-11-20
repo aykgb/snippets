@@ -7,6 +7,8 @@
 *.obj
 *.class
 .vscode
+.metals
 *.dSYM
 CMakeFiles/
 CMakeCache.txt
+.metals/

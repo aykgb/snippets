@@ -57,6 +57,5 @@ int main()
     Base::testStaticFun();
     Base::testStaticWrapper(&inst1);
 
-
     return 0;
 }
