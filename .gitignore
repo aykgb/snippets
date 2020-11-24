@@ -15,5 +15,5 @@ CMakeCache.txt
 cc_snippets_test
 build
 cxx/proto/
-third_party/
+third_party/brpc
 gogo/gogo
