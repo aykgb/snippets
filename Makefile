@@ -1,4 +1,4 @@
-.PHONY:init,cc_snippets_test,run,clear,clean
+.PHONY:cc_snippets_test,run,clear,clean
 
 cc_snippets_test: clear
 	cd cxx && mkdir -p build; \
