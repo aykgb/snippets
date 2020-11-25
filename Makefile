@@ -1,4 +1,7 @@
-.PHONY:cc_snippets_test,run,clear,clean
+.PHONY:rocksdb,cc_snippets_test,run,clear,clean
+
+rocksdb:
+	cd cxx/rocksdb && make -j 8 static_lib
 
 cc_snippets_test: clear
 	cd cxx && mkdir -p build; \
