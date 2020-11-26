@@ -13,3 +13,6 @@ CMakeFiles/
 CMakeCache.txt
 .metals/
 cc_snippets_test
+build
+cxx/proto/
+third_party/
