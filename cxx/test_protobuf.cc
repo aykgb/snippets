@@ -1,5 +1,5 @@
 #include "common/common.h"
-#include "echo.pb.h"
+#include "proto/echo.pb.h"
 
 namespace snippets {
 

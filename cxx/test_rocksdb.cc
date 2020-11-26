@@ -8,7 +8,7 @@ TEST(RocksDB, OpenTest_00) {
   rocksdb::Options options;
   options.create_if_missing = true;
 
-  rocksdb::DB* db{nullptr};
+  rocksdb::DB *db{nullptr};
   std::string db_path = "/tmp/snippets_rocksdb_test_XXXXXX";
   ASSERT_TRUE(mkdtemp(&db_path[0]) != nullptr);
   VLOG(10) << "db_path " << db_path;
