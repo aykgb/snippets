@@ -12,6 +12,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O0")
 set(INCLUDE_DIRECTORIES
     /usr/include
     /usr/local/include
+    ${PROJECT_SOURCE_DIR}/proto
     ${PROJECT_SOURCE_DIR}/../third_party/brpc/include
     ${PROJECT_SOURCE_DIR}/../third_party/rocksdb/include)
 set(LINK_DIRECTORIES
@@ -25,13 +26,14 @@ link_directories(${LINK_DIRECTORIES})
 #.4.1 添加子目录（有独立CMakeLists.txt 文件，并编译为链接库）
 
 #.5 扫描源文件
-aux_source_directory(. SOURCES)
+aux_source_directory("${PROJECT_SOURCE_DIR}" SOURCES)
+aux_source_directory("${PROJECT_SOURCE_DIR}/proto" PROTO_SOURCES)
 
 #.6 添加可执行文件
-add_executable(cc_snippets_test ${SOURCES})
+add_executable(cc_snippets_test ${SOURCES} ${PROTO_SOURCES})
 
 #.7 链接第三方库或子目录编译的链接的链接库
 target_link_libraries(cc_snippets_test
-          glog gtest gflags
+          glog gtest gflags protobuf
           rocksdb lz4 zstd snappy bz2 z
           pthread)

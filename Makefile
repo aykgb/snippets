@@ -1,16 +1,18 @@
-.PHONY:rocksdb,brpc,cc_snippets_test,run,clear,clean
+.PHONY:all
+all:rocksdb,brpc,proto,cc_snippets_test,run
 
 rocksdb:
-	cd third_party/rocksdb && make -j 8 static_lib
+	@cd third_party/rocksdb && make -j 8 static_lib
 
+BRPC_TARGET=brpc-shared
 brpc:
-	cd third_party/brpc && mkdir -p build && cmake build && make -j 8 -C build
-	cd third_party/brpc && cp -ruf build/output/* .
+	@cd third_party/brpc && mkdir -p build && cmake build && make -j 8 ${BRPC_TARGET} -C build
+	@cd third_party/brpc && cp -ruf build/output/* .
 
 cc_snippets_test: clear
-	cd cxx && mkdir -p build; \
-		cd build && cmake .. && make -j 4;
-	ln -sf cxx/build/cc_snippets_test cc_snippets_test
+	@cd cxx && cp -ur ../proto . && cd proto && protoc *.proto --proto_path=. --cpp_out=.
+	@cd cxx && mkdir -p build && cd build && cmake .. && make -j 8;
+	@ln -sf cxx/build/cc_snippets_test cc_snippets_test
 
 run:
 	./cc_snippets_test
@@ -24,5 +26,6 @@ format:
 clear:
 	rm -f cc_snippets_test
 
-clean: clear
-	rm -r cxx/build
+.PHONY:clean
+clean:
+	@rm -r cxx/build

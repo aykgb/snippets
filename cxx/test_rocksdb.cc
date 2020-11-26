@@ -2,7 +2,7 @@
 
 #include "common/common.h"
 
-namespace Snippets {
+namespace snippets {
 
 TEST(RocksDB, OpenTest_00) {
   rocksdb::Options options;
@@ -19,4 +19,4 @@ TEST(RocksDB, OpenTest_00) {
   std::unique_ptr<rocksdb::DB> guard(db);
 }
 
-}  // namespace Snippets
+}  // namespace snippets
