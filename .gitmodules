@@ -1,3 +1,3 @@
-[submodule "cxx/rocksdb"]
-	path = cxx/rocksdb
-	url = https://github.com/facebook/rocksdb
+[submodule "third_party/rocksdb"]
+	path = third_party/rocksdb
+	url = https://github.com/facebook/rocksdb.git

@@ -9,6 +9,7 @@
 .vscode
 .metals
 *.dSYM
+*.bk
 CMakeFiles/
 CMakeCache.txt
 .metals/

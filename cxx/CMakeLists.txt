@@ -7,10 +7,16 @@ project(cc_snippets_test)
 #.3 设置编译变量和常量
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O0")
-set(INCLUDE_DIRECTORIES /usr/include /usr/local/include)
-set(LINK_DIRECTORIES /usr/lib /usr/local/lib)
 
 #.4 设置第三方依赖头文件/库
+set(INCLUDE_DIRECTORIES
+  /usr/include
+  /usr/local/include
+  ${PROJECT_SOURCE_DIR}/../third_party/rocksdb/include)
+set(LINK_DIRECTORIES
+  /usr/lib
+  /usr/local/lib
+  ${PROJECT_SOURCE_DIR}/../third_party/rocksdb)
 include_directories(${INCLUDE_DIRECTORIES})
 link_directories(${LINK_DIRECTORIES})
 
@@ -23,4 +29,7 @@ aux_source_directory(. SOURCES)
 add_executable(cc_snippets_test ${SOURCES})
 
 #.7 链接第三方库或子目录编译的链接的链接库
-target_link_libraries(cc_snippets_test glog gtest gflags)
+target_link_libraries(cc_snippets_test
+          glog gtest gflags
+          rocksdb lz4 zstd snappy bz2 z
+          pthread)
