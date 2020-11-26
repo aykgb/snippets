@@ -1,7 +1,11 @@
-.PHONY:rocksdb,cc_snippets_test,run,clear,clean
+.PHONY:rocksdb,brpc,cc_snippets_test,run,clear,clean
 
 rocksdb:
-	cd cxx/rocksdb && make -j 8 static_lib
+	cd third_party/rocksdb && make -j 8 static_lib
+
+brpc:
+	cd third_party/brpc && mkdir -p build && cmake build && make -j 8 -C build
+	cd third_party/brpc && cp -ruf build/output/* .
 
 cc_snippets_test: clear
 	cd cxx && mkdir -p build; \

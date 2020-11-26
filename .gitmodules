@@ -1,3 +1,6 @@
-[submodule "cxx/rocksdb"]
-	path = cxx/rocksdb
-	url = https://github.com/facebook/rocksdb
+[submodule "third_party/rocksdb"]
+	path = third_party/rocksdb
+	url = https://github.com/facebook/rocksdb.git
+[submodule "third_party/brpc"]
+	path = third_party/brpc
+	url = https://github.com/apache/incubator-brpc.git

@@ -7,15 +7,20 @@ project(cc_snippets_test)
 #.3 设置编译变量和常量
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O0")
-set(INCLUDE_DIRECTORIES /usr/include /usr/local/include ${PROJECT_SOURCE_DIR}/rocksdb/include)
-set(LINK_DIRECTORIES /usr/lib /usr/local/lib ${PROJECT_SOURCE_DIR}/rocksdb)
 
 #.4 设置第三方依赖头文件/库
+set(INCLUDE_DIRECTORIES
+    /usr/include
+    /usr/local/include
+    ${PROJECT_SOURCE_DIR}/../third_party/brpc/include
+    ${PROJECT_SOURCE_DIR}/../third_party/rocksdb/include)
+set(LINK_DIRECTORIES
+  /usr/lib
+  /usr/local/lib
+  ${PROJECT_SOURCE_DIR}/../third_party/brpc/lib
+  ${PROJECT_SOURCE_DIR}/../third_party/rocksdb)
 include_directories(${INCLUDE_DIRECTORIES})
 link_directories(${LINK_DIRECTORIES})
-
-message("${INCLUDE_DIRECTORIES}")
-message("${LINK_DIRECTORIES}")
 
 #.4.1 添加子目录（有独立CMakeLists.txt 文件，并编译为链接库）
 
