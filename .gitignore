@@ -16,3 +16,4 @@ cc_snippets_test
 build
 cxx/proto/
 third_party/
+gogo/gogo
