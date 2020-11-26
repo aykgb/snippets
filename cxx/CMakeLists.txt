@@ -13,12 +13,10 @@ set(INCLUDE_DIRECTORIES
     /usr/include
     /usr/local/include
     ${PROJECT_SOURCE_DIR}/proto
-    ${PROJECT_SOURCE_DIR}/../third_party/brpc/include
     ${PROJECT_SOURCE_DIR}/../third_party/rocksdb/include)
 set(LINK_DIRECTORIES
   /usr/lib
   /usr/local/lib
-  ${PROJECT_SOURCE_DIR}/../third_party/brpc/lib
   ${PROJECT_SOURCE_DIR}/../third_party/rocksdb)
 include_directories(${INCLUDE_DIRECTORIES})
 link_directories(${LINK_DIRECTORIES})
@@ -36,4 +34,5 @@ add_executable(cc_snippets_test ${SOURCES} ${PROTO_SOURCES})
 target_link_libraries(cc_snippets_test
           glog gtest gflags protobuf
           rocksdb lz4 zstd snappy bz2 z
+          brpc
           pthread)

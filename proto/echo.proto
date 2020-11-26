@@ -1,6 +1,8 @@
 syntax = "proto2";
 
-package snippets;
+package snippets.proto;
+
+option cc_generic_services = true;
 
 message EchoRequest {
   required string message = 1;

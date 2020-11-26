@@ -6,12 +6,15 @@ rocksdb:
 
 BRPC_TARGET=brpc-shared
 brpc:
-	@cd third_party/brpc && mkdir -p build && cmake build && make -j 8 ${BRPC_TARGET} -C build
+	@cd third_party/brpc && mkdir -p build && cd build && cmake .. -DWITH_GLOG=ON && make -j 8 ${BRPC_TARGET}
 	@cd third_party/brpc && cp -ruf build/output/* .
 
-cc_snippets_test: clear
+gen_proto:
 	@cd cxx && cp -ur ../proto . && cd proto && protoc *.proto --proto_path=. --cpp_out=.
-	@cd cxx && mkdir -p build && cd build && cmake .. && make -j 8;
+
+cc_snippets_test: gen_proto brpc
+	@rm -f cc_snippets_test
+	@cd cxx && mkdir -p build && cd build && cmake .. && make -j 8
 	@ln -sf cxx/build/cc_snippets_test cc_snippets_test
 
 run:

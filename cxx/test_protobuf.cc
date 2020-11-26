@@ -4,8 +4,8 @@
 namespace snippets {
 
 TEST(Proto, EchoTest) {
-  snippets::EchoRequest request;
-  snippets::EchoResponse response;
+  proto::EchoRequest request;
+  proto::EchoResponse response;
   request.set_message("hello");
   response.set_message("hi");
   LOG(INFO) << "request " << request.ShortDebugString();
