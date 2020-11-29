@@ -1,15 +1,16 @@
 #include <math.h>
 
+#include <thread>
+
 #include "common/common.h"
 #include "common/time_util.h"
-
-#include <thread>
 
 namespace snippets {
 
 class ChronoGraph {
  public:
-  ChronoGraph(int64_t ttl_ms) : start_timepoint_(Now()), ttl_ms_(ttl_ms) {}
+  explicit ChronoGraph(int64_t ttl_ms)
+      : start_timepoint_(Now()), ttl_ms_(ttl_ms) {}
 
   bool HasTimeOut() { return RemainingTimeMS() == 0; }
 
@@ -35,7 +36,7 @@ template <typename T = ChronoGraph,
               typename std::enable_if_t<std::is_base_of<ChronoGraph, T>::value>>
 class RetryPolicy {
  public:
-  RetryPolicy(std::shared_ptr<T> graph) : chrono_graph_(graph) {}
+  explicit RetryPolicy(std::shared_ptr<T> graph) : chrono_graph_(graph) {}
 
   bool BackOffAndCanRetry() {
     SleepMS(chrono_graph_->Next());
@@ -51,7 +52,7 @@ class LinearChronoGraph : public ChronoGraph {
   LinearChronoGraph(int64_t ttl_ms, int64_t duration_num)
       : ChronoGraph(ttl_ms) {
     next_duration_ms_ = ttl_ms / duration_num;
-    CHECK(next_duration_ms_ > 10);
+    CHECK_GE(next_duration_ms_, 10);
     if (ttl_ms % duration_num) {
       next_duration_ms_ += 1;
     }
@@ -71,7 +72,7 @@ class ExponentialChronoGraph : public ChronoGraph {
       : ChronoGraph(ttl_ms), coefficient_(coefficient) {
     next_duration_ms_ =
         ttl_ms * (coefficient - 1) / (pow(coefficient, duration_num) - 1);
-    CHECK(next_duration_ms_ > 10);
+    CHECK_GE(next_duration_ms_, 10);
     if (ttl_ms % next_duration_ms_) {
       next_duration_ms_ += 1;
     }

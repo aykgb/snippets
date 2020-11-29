@@ -1,7 +1,7 @@
-#include "common/common.h"
-
 #include <string>
 #include <vector>
+
+#include "common/common.h"
 
 namespace snippets {
 

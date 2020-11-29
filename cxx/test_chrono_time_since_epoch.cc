@@ -1,9 +1,8 @@
+#include <chrono>
+#include <iostream>
+#include <string>
 
 #include "common/common.h"
-
-#include <iostream>
-#include <chrono>
-#include <string>
 
 namespace snippets {
 

@@ -8,6 +8,12 @@ cc_snippets_test: clear
 run:
 	./cc_snippets_test
 
+lint:
+	@git ls-files | egrep '.*\.(h|cc)' | grep -v trash | xargs cpplint --filter=-legal/copyright,-build/c++11,-build/header_guard
+
+format:
+	@git ls-files | egrep '.*\.(h|cc)' | grep -v trash | xargs clang-format -style=google -i
+
 clear:
 	rm -f cc_snippets_test
 
