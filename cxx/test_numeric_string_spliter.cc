@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 
-namespace Snippets {
+namespace snippets {
 
 class NumericStringSpliter {
  public:
@@ -51,4 +51,4 @@ TEST(NumericStringSpliter, Test_00) {
   ASSERT_EQ(res.size(), 99);
 }
 
-}  // namespace Snippets
+}  // namespace snippets

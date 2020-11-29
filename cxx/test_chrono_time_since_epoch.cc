@@ -5,7 +5,7 @@
 #include <chrono>
 #include <string>
 
-namespace Snippets {
+namespace snippets {
 
 TEST(chrono, TimeSinceEpoch) {
   auto now = std::chrono::steady_clock::now().time_since_epoch();
@@ -25,4 +25,4 @@ TEST(chrono, TimeSinceEpoch) {
             << std::endl;
 }
 
-}  // namespace Snippets
+}  // namespace snippets
